@@ -40,7 +40,7 @@ make mintNft-anvil      # Mint an NFT on local Anvil instance
 make mintNft-sepolia    # Mint an NFT on Sepolia test network
 ```
 
-Contract Overview
+# Contract Overview
 BasicNft.sol
 The BasicNft contract is an ERC721 NFT implementation with the following features:
 
