@@ -47,6 +47,13 @@ The BasicNft contract is an ERC721 NFT implementation with the following feature
 Main Functions
 constructor(): Initializes the contract by setting the fund receiver to the contract deployer's address.
 
+``` solidity
+    constructor() ERC721("BasicNft", "BNFT") {
+        FUND_RESIVER = msg.sender;
+    }
+
+```
+
 mintNft(string memory tokenUrl) public payable: Allows users to mint a new NFT. Requires payment of MINT_PRICE (69 wei). The tokenUrl parameter is used to store the metadata URL for the minted NFT.
 
 tokenURI(uint256 tokenId) public view override returns (string memory): Returns the metadata URL for a given token ID.
