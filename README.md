@@ -107,13 +107,31 @@ withdrawETH() public OnlyFundResiver: Allows the current fund receiver to withdr
 
 OnlyFundResiver: Restricts function access to only the current fund receiver.
 
+```solidity
+    modifier OnlyFundResiver() {
+        if (msg.sender != FUND_RESIVER) {
+            revert ONLY_FUND_RESIVER_CAN_CALL();
+        }
+        _;
+    }
+```
+
 # Custom Errors
 
-NEED_MORE_ETH(): Raised when the sent value is not equal to the MINT_PRICE.
+ Raised when the sent value is not equal to the MINT_PRICE.
+ ```solidity
+    error NEED_MORE_ETH();
+```
 
-ONLY_FUND_RESIVER_CAN_CALL(): Raised when a non-fund receiver attempts to execute a restricted function.
+ Raised when a non-fund receiver attempts to execute a restricted function.
+ ```solidity
+ error ONLY_FUND_RESIVER_CAN_CALL();
+```
 
-INSUFFICIENT_BALANCE(): Raised if there is an attempt to withdraw when the contract balance is zero.
+ Raised if there is an attempt to withdraw when the contract balance is zero.
+ ```solidity
+    error INSUFFICIENT_BALANCE();
+```
 
 # Deployment Scripts
 
