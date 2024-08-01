@@ -15,6 +15,7 @@ contract BasicNft is ERC721 {
     error INSUFFICIENT_BALANCE();
 
     constructor() ERC721("BasicNft", "BNFT") {
+      s_tokenCounter = 0;
         FUND_RESIVER = msg.sender;
     }
 
