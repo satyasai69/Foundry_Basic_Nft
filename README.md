@@ -45,10 +45,11 @@ BasicNft.sol
 The BasicNft contract is an ERC721 NFT implementation with the following features:
 
 Main Functions
-constructor(): Initializes the contract by setting the fund receiver to the contract deployer's address.
+constructor(): Initializes the contract by setting the okenCounter and fund receiver to the contract deployer's address.
 
 ``` solidity
     constructor() ERC721("BasicNft", "BNFT") {
+        s_tokenCounter = 0;
         FUND_RESIVER = msg.sender;
     }
 
