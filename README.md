@@ -56,11 +56,52 @@ constructor(): Initializes the contract by setting the fund receiver to the cont
 
 mintNft(string memory tokenUrl) public payable: Allows users to mint a new NFT. Requires payment of MINT_PRICE (69 wei). The tokenUrl parameter is used to store the metadata URL for the minted NFT.
 
+``` solidity
+    function mintNft(string memory tokenUrl) public payable {
+        if (msg.value != MINT_PRICE) {
+            revert NEED_MORE_ETH();
+        }
+        s_tokenidtourl[s_tokenCounter] = tokenUrl;
+        _safeMint(msg.sender, s_tokenCounter);
+        s_tokenCounter++;
+        payable(FUND_RESIVER).transfer(msg.value);
+    }
+```
+
 tokenURI(uint256 tokenId) public view override returns (string memory): Returns the metadata URL for a given token ID.
+
+``` solidity
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory) {
+        return s_tokenidtourl[tokenId];
+    }
+```
+
 
 transferFundResiverShip(address newFundResiver) public OnlyFundResiver: Allows the current fund receiver to transfer the fund receiver role to a new address.
 
+``` solidity
+    function transferFundResiverShip(
+        address newFundResiver
+    ) public OnlyFundResiver {
+        FUND_RESIVER = newFundResiver;
+    }
+```
+
+
 withdrawETH() public OnlyFundResiver: Allows the current fund receiver to withdraw all ETH from the contract.
+
+``` solidity
+    function withdrawETH() public OnlyFundResiver {
+        uint256 balance = address(this).balance;
+        if (balance < 0) {
+            revert INSUFFICIENT_BALANCE();
+        }
+        payable(FUND_RESIVER).transfer(balance);
+    }
+```
+
 
 # Modifiers
 
